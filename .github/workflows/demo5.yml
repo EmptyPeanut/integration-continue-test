@@ -10,8 +10,8 @@ jobs:
     runs-on : ubuntu-latest
     steps:
       - name: "C'est une PR"
-        if: ${{github.event_name.pull_request}}
+        if: [[ ${{github.event_name}} == 'pull_request' ]]
         run: echo "$PR_MESSAGE"
       - name: "C'est un push"
-        if: ${{github.event_name.push}}
+        if: [[ ${{github.event_name}} == 'push']]
         run: echo "$PUSH_MESSAGE"
