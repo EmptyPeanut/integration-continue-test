@@ -1,0 +1,25 @@
+name: Amnesia
+on: workflow_dispatch
+
+env:
+  NAME: Theo
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    env:
+      ENTREPRISE: Allstore
+    steps:
+      - uses: actions/checkout@v3
+      - name: Dit bonjour
+        run: echo 'Salut $NAME ! Tu travailles pour $ENTREPRISE c'est ça ? Passe un bon $DAY'
+        env:
+          DAY: Lundi
+      - name: Lundi ?
+        run: echo 'Quel jour sommes nous, $DAY ?'
+
+  say_goodbye:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dit au revoir
+        run: echo 'Au revoir $NAME ! Tu travailles pour quelle entreprise ? $ENTREPRISE'
