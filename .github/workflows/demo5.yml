@@ -1,5 +1,7 @@
 name: pr-or-push
-on: workflow_dispatch
+on:
+  push:
+  pull:
 
 env:
   PR_MESSAGE: "C'est une pull request !"
