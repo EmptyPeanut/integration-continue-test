@@ -9,9 +9,9 @@ jobs:
   say_event:
     runs-on : ubuntu-latest
     steps:
-      - name: "C'est un PR"
-        if: ${{github.event_name == 'pull_request'}}
+      - name: "C'est une PR"
+        if: ${{github.event_name.pull_request}}
         run: echo "$PR_MESSAGE"
-      - name: "Dit bonjour à Théo !"
-        if: ${{github.event_name == 'push'}}
+      - name: "C'est un push"
+        if: ${{github.event_name.push}}
         run: echo "$PUSH_MESSAGE"
