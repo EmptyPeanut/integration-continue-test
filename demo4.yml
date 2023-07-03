@@ -11,6 +11,6 @@ jobs:
       - name: "Dit bonjour"
         if: ${{env.NAME != 'Theo'}}
         run: echo "Salut toi, tu n'es pas Theo !"
-      - name:
+      - name: "Dit bonjour à Théo !"
         if: ${{env.NAME == 'Theo'}}
         run: echo "Salut $NAME ! Tu as l'air en forme !"
