@@ -1,0 +1,16 @@
+name: hello-theo
+on: workflow_dispatch
+
+env:
+  NAME: Theo
+
+jobs:
+  say_hello:
+    runs-on : ubuntu-latest
+    steps:
+      - name: "Dit bonjour"
+        if: ${{env.NAME != 'Theo'}}
+        run: echo "Salut toi, tu n'es pas Theo !"
+      - name:
+        if: ${{env.NAME == 'Theo'}}
+        run: echo "Salut $NAME ! Tu as l'air en forme !"
