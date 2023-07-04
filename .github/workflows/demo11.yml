@@ -3,15 +3,8 @@ on:
   workflow_dispatch:
 
 env:
-  FRUITS:
-    - pomme
-    - bannane
-    - pêche
-    - poire
-  NOMS:
-    - Theo
-    - Valentin
-    - Adrien
+  FRUITS: ("pomme" "bannane" "peche" "poire")
+  NOMS: ("Theo" "Valentin" "Adrien")
 
 jobs:
   fruits_matrix:
