@@ -1,0 +1,18 @@
+name: issue
+on:
+  workflow_dispatch:
+    types: [opened]
+jobs:
+  first_one:
+    runs-on : ubuntu-latest
+    steps:
+      - name: Message
+        run: echo "Premier Job fini"
+
+  second_one:
+    if: ${{ always() }}
+    needs: [first_one]
+    runs-on : ubuntu-latest
+    steps:
+      - name: Message
+        run: echo "Second Job lancé"
