@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: create file
         run: mkdir -p artifacts/
-        run: echo "coucou" > artifact.txt
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with:
