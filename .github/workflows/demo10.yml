@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create file
-        run: mkdir -p artifacts/
+        run: mkdir -p artifacts
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with:
