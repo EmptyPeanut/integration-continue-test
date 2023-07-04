@@ -1,18 +1,33 @@
+# name: fruits
+# on:
+#   workflow_dispatch:
+
+# env:
+#   FRUITS: ("pomme" "bannane" "peche" "poire")
+#   NOMS: ("Theo" "Valentin" "Adrien")
+
+# jobs:
+#   fruits_matrix:
+#     strategy:
+#       fail-fast: true
+#       matrix:
+#         fruits: ${{env.FRUITS}}
+#         noms: ${{env.NOMS}}
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Affiche la combinaison
+#         run: echo "${{ matrix.noms }} mange une ${{ matrix.fruits }}"
 name: fruits
 on:
   workflow_dispatch:
-
-env:
-  FRUITS: ("pomme" "bannane" "peche" "poire")
-  NOMS: ("Theo" "Valentin" "Adrien")
 
 jobs:
   fruits_matrix:
     strategy:
       fail-fast: true
       matrix:
-        fruits: ${{env.FRUITS}}
-        noms: ${{env.NOMS}}
+        fruits: ("pomme" "bannane" "peche" "poire")
+        noms: ("Theo" "Valentin" "Adrien")
     runs-on: ubuntu-latest
     steps:
       - name: Affiche la combinaison
