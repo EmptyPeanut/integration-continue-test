@@ -26,8 +26,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        fruits: ("pomme" "bannane" "peche" "poire")
-        noms: ("Theo" "Valentin" "Adrien")
+        fruits: ["pomme", "bannane", "peche", "poire"]
+        noms: ["Theo", "Valentin", "Adrien"]
     runs-on: ubuntu-latest
     steps:
       - name: Affiche la combinaison
