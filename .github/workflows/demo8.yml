@@ -1,0 +1,12 @@
+name: next
+on:
+  workflow_run:
+    workflows: [issue]
+    types:
+      - completed
+jobs:
+  next:
+    runs-on : ubuntu-latest
+    steps:
+      - name: Message
+        run: echo "Next triggered"
