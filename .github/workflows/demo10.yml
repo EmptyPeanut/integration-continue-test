@@ -8,9 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create file
-        run: mkdir -p artifacts
+        run: echo "coucou" > artifact.txt
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
-          path: artifacts/artifact.txt
+          name: artifact
+          path: artifact.txt
+  download:
+    need: upload
+    name: download
+    runs-on: ubuntu-latest
+    steps:
+      - name: download file
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact
+      - name: read-file
+        run: cat artifact.txt
