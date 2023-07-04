@@ -1,7 +1,7 @@
 name: issue
 on:
   workflow_dispatch:
-    types: [opened]
+  
 jobs:
   first_one:
     runs-on : ubuntu-latest
