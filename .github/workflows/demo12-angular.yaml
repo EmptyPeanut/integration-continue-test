@@ -17,7 +17,12 @@ jobs:
         if: github.event_name == 'push' && (startsWith(github.ref, 'main') || startsWith(github.ref, 'develop'))
         run: echo "Les push ne sont pas autorisés sur cette branche" && exit 1
 
+      - name: Nom de branche
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: Vérification commit conventionnel sur les branches hotfix et features
-        if: (startsWith(github.ref#refs/heads/, 'hotfix') || startsWith(github.ref#refs/heads/, 'features')) && !startsWith(github.event.head_commit.message, 'fix:' ) || !startsWith(github.event.head_commit.message, 'feat:')
+        if: (startsWith(branch, 'hotfix') || startsWith(branch, 'features')) && !startsWith(github.event.head_commit.message, 'fix:' ) || !startsWith(github.event.head_commit.message, 'feat:')
         run: echo "Le message du commit n'est pas conventionnel" && echo ${{github.ref}} && exit 1
 
