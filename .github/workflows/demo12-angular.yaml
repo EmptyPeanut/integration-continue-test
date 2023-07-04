@@ -1,0 +1,23 @@
+name: exo_angular
+on:
+  push:
+    branches: [main, develop, features/*, hotfix/*]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+
+  conventional_commits:
+
+    name: conventional_commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Vérification évènement/branche
+        if: github.event_name == 'push' && (${{ startsWith(github.ref, 'main') }} || ${{ startsWith(github.ref, 'develop' }}))
+        run: echo "Les push ne sont pas autorisés sur cette branche" && exit 1
+
+      - name: Vérification commit conventionnel
+        if: github.ref == '${{ !startsWith(github.event.head_commit.message, 'fix:' )}} || ${{ !startsWith(github.event.head_commit.message, 'feat:')}}
+        run: echo "Le message du commit n'est pas conventionnel" && exit 1
+
