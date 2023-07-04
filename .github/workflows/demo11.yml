@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        fruits: $FRUITS
-        noms: $NOMS
+        fruits: ${{env.FRUITS}}
+        noms: ${{env.NOMS}}
     runs-on: ubuntu-latest
     steps:
       - name: Affiche la combinaison
