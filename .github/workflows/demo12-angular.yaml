@@ -8,11 +8,13 @@ on:
 jobs:
 
   conventional_commits:
-    if: github.event_name == 'push' && (startsWith(github.head_ref, 'hotfix') || startsWith(github.head_ref, 'features'))
+    # if: github.event_name == 'push' && (startsWith(github.head_ref, 'hotfix') || startsWith(github.head_ref, 'features'))
+    if: github.event_name == 'push'
     name: conventional_commits
     runs-on: ubuntu-latest
 
     steps:
+      - run: echo ${{ github.head_ref }}
       - name: Affichage du message commit & nom de branche
         run: echo ${{github.ref}} && echo ${{github.event.head_commit.message}}
 
