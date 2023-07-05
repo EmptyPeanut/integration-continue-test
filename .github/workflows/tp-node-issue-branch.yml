@@ -1,0 +1,13 @@
+name: create_branch_on_issue_assigned
+on:
+  issues:
+    types: [ assigned ]
+
+jobs:
+  create_issue_branch_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Création de la branche liée au ticket
+        uses: robvanderleek/create-issue-branch@main
+        with:
+          defaultBranch: 'develop'

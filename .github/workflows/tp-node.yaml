@@ -1,25 +1,9 @@
 name: tp_node
 on:
-  push:
-    branches: [features/*, hotfix/*]
   pull_request:
-    branches: [main, develop]
+    branches: [develop]
 
 jobs:
-
-  # Vérifie que le message de commit soit conventionnel ou non
-  conventional_commits:
-    if: github.event_name == 'push' && (startsWith(github.ref_name, 'hotfix') || startsWith(github.ref_name, 'features'))
-    name: conventional_commits
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Affichage du nom de branche & du message commit
-        run: echo ${{github.ref_name}} && echo ${{github.event.head_commit.message}}
-
-      - name: Vérification commit conventionnel sur les branches hotfix et features
-        if: (!startsWith(github.event.head_commit.message, 'fix:' ) && !startsWith(github.event.head_commit.message, 'feat:'))
-        run: echo "Le message du commit n'est pas conventionnel" && exit 1
 
   # Fait des tests sur différentes versions de node
   tests_on_node_versions:
@@ -43,10 +27,9 @@ jobs:
           node-version: ${{ matrix.version }}
 
       # Le test de node fait une erreur ce qui fait sortir du workflow et m'empêche de créer un artefact
-      # donc je pass outre l'erreur, l'enregistre et la trigger quand j'ai fini de faire l'artefact
+      # donc je passe outre l'erreur, l'enregistre et la trigger quand j'ai fini de faire l'artefact
       - name: Test de node v${{ matrix.version }} et création de l'artefact
         run: npm test > test_output.txt || echo "error=true" >> $GITHUB_OUTPUT
-        # continue-on-error: true
         id: npm-test
 
       - name: Création de l'artefact
