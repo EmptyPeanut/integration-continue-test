@@ -1,0 +1,17 @@
+name: delete_merged_branch
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  automerge:
+    if: startsWith(github.head_ref, 'features')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete merged branch
+        uses: koj-co/delete-merged-action@master
+        with:
+          branches: "features/*"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

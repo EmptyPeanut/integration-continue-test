@@ -1,0 +1,2 @@
+defaultBranch: 'develop'
+branchName: 'features/${issue.number}-${issue.title}'
