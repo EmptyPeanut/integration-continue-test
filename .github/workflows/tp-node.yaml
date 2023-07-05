@@ -1,4 +1,4 @@
-name: tp_node
+name: tp_node_test_node
 on:
   pull_request:
     branches: [develop]

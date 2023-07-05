@@ -1,4 +1,4 @@
-name: tp_node
+name: tp_node_conventionnal_commit
 on:
   push:
     branches: [features/*, hotfix/*]
