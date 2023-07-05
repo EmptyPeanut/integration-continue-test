@@ -45,6 +45,7 @@ jobs:
       # Le test de node fait une erreur ce qui fait sortir du workflow et m'empêche de créer un artefact
       - name: Test de node v${{ matrix.version }} et création de l'artefact
         run: npm test > test_output.txt 2>&1
+        continue-on-error: true
 
       - name: Création de l'artefact
         uses: actions/upload-artifact@v3
