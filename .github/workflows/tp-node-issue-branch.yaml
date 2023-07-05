@@ -4,9 +4,12 @@ on:
     types: [ assigned ]
 
 jobs:
+
   create_issue_branch_job:
+
     runs-on: ubuntu-latest
     steps:
+
       - name: Création de la branche liée au ticket
         uses: robvanderleek/create-issue-branch@main
         with:
