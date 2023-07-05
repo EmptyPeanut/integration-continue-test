@@ -2,6 +2,7 @@ name: create_branch_on_issue_assigned
 on:
   issues:
     types: [assigned]
+  workflow_dispatch:
 
 jobs:
 
@@ -9,7 +10,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-
+      - run: exit 1
       - name: Création de la branche liée au ticket
         uses: robvanderleek/create-issue-branch@main
         with:
