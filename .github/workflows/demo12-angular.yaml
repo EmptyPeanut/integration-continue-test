@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo ${{ github.head_ref }}
+      - run: echo ${{ github.ref_name }}
       - name: Affichage du message commit & nom de branche
         run: echo ${{github.ref}} && echo ${{github.event.head_commit.message}}
 
