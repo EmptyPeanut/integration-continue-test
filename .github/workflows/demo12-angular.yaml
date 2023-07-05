@@ -8,7 +8,7 @@ on:
 jobs:
 
   conventional_commits:
-  
+
     name: conventional_commits
     runs-on: ubuntu-latest
 
