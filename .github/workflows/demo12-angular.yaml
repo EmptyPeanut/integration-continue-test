@@ -18,7 +18,7 @@ jobs:
 
       - name: Vérification commit conventionnel sur les branches hotfix et features
         if: (startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/features')) && (!startsWith(github.event.head_commit.message, 'fix:' ) || !startsWith(github.event.head_commit.message, 'feat:'))
-        run: echo "Le message du commit n'est pas conventionnel" && echo ${{ (startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/features')) && (!startsWith(github.event.head_commit.message, 'fix:' ) || !startsWith(github.event.head_commit.message, 'feat:')) }} && exit 1
+        run: echo "Le message du commit n'est pas conventionnel" && echo ${{ (startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/features')) }} && echo ${{ (!startsWith(github.event.head_commit.message, 'fix:' ) || !startsWith(github.event.head_commit.message, 'feat:')) }} exit 1
 
   tests_on_node_versions:
     if: github.event_name == 'pull_request' && startsWith(github.ref, 'refs/heads/features') && startsWith(github.base_ref, 'refs/heads/develop')
