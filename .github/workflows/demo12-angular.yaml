@@ -8,7 +8,7 @@ on:
 jobs:
 
   conventional_commits:
-    if: github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/features'))
+    if: github.event_name == 'push' && (startsWith(github.head_ref, 'hotfix') || startsWith(github.head_ref, 'features'))
     name: conventional_commits
     runs-on: ubuntu-latest
 
@@ -21,8 +21,7 @@ jobs:
         run: echo "Le message du commit n'est pas conventionnel" && exit 1
 
   tests_on_node_versions:
-    # if: github.event_name == 'pull_request' && startsWith(github.event.pull_request.ref, 'refs/heads/features') && startsWith(github.event.pull_request.base_ref, 'refs/heads/develop')
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && startsWith(github.event.pull_request.ref, 'features') && startsWith(github.event.pull_request.base_ref, 'develop')
     name: tests_on_node_versions
     runs-on: ubuntu-latest
 
