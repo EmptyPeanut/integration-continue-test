@@ -22,7 +22,7 @@ jobs:
 
   tests_on_node_versions:
     # if: github.event_name == 'pull_request' && startsWith(github.ref, 'refs/heads/features') && startsWith(github.base_ref, 'refs/heads/develop')
-    if: github.event_name == 'pull_request' && startsWith(github.ref, 'refs/heads/features')
+    if: github.event_name == 'pull_request'
     name: tests_on_node_versions
     runs-on: ubuntu-latest
 
