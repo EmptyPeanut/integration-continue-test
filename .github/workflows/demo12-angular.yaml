@@ -7,21 +7,23 @@ on:
 
 jobs:
 
+  # Check si le message de commit est conventionnel ou non
   conventional_commits:
     if: github.event_name == 'push' && (startsWith(github.ref_name, 'hotfix') || startsWith(github.ref_name, 'features'))
     name: conventional_commits
     runs-on: ubuntu-latest
 
     steps:
-      - name: Affichage nom de branche & du message commit
+      - name: Affichage du nom de branche & du message commit
         run: echo ${{github.ref_name}} && echo ${{github.event.head_commit.message}}
 
       - name: Vérification commit conventionnel sur les branches hotfix et features
         if: (!startsWith(github.event.head_commit.message, 'fix:' ) && !startsWith(github.event.head_commit.message, 'feat:'))
         run: echo "Le message du commit n'est pas conventionnel" && exit 1
 
+  # Fait des test sur différentes versions de node
   tests_on_node_versions:
-    if: github.event_name == 'pull_request' && startsWith(github.event.pull_request.ref, 'features') && startsWith(github.event.pull_request.base_ref, 'develop')
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'features') && startsWith(github.event.pull_request.base_ref, 'develop')
     name: tests_on_node_versions
     runs-on: ubuntu-latest
 
