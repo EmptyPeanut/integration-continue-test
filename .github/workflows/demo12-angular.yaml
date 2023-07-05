@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      run: echo "Le message du commit n'est pas conventionnel" && echo ${{github.ref}} && echo ${{github.event.head_commit.message}}
+      - name: Affichage du message commit & nom de branche
+        run: echo "Le message du commit n'est pas conventionnel" && echo ${{github.ref}} && echo ${{github.event.head_commit.message}}
 
       - name: Vérification commit conventionnel sur les branches hotfix et features
         if: (startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/features')) && ! (startsWith(github.event.head_commit.message, 'fix:' ) || ! startsWith(github.event.head_commit.message, 'feat:'))
