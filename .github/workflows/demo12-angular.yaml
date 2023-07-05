@@ -43,7 +43,10 @@ jobs:
           node-version: ${{ matrix.version }}
 
       - name: Test de node v${{ matrix.version }} et création de l'artefact
-        run: npm run test:coverage > artifact.txt
+        run: |
+          npm install
+          npm run build --if-present
+          npm test > artifact.txt
 
       - name: upload artifact
         uses: actions/upload-artifact@v3
