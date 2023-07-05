@@ -3,7 +3,7 @@ on:
   push:
     branches: [features/*, hotfix/*]
   pull_request:
-    branches: [main, develop, features/*]
+    branches: [main, develop]
 
 jobs:
 
