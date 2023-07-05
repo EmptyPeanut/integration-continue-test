@@ -1,2 +1,2 @@
 defaultBranch: 'develop'
-branchName: '${issue.number}-${issue.title}'
+branchName: 'features/${issue.number}-${issue.title}'
