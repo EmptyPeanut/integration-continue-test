@@ -1,0 +1,51 @@
+name: tp_node_test_node
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+
+  # Fait des tests sur différentes versions de node
+  tests_on_node_versions:
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'features') && startsWith(github.base_ref, 'develop')
+    name: tests_on_node_versions
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        version: [14, 16]
+
+    steps:
+
+      - name: Lecture du code
+        uses: actions/checkout@v3
+
+      - run: echo ${{ github.head_ref }} && echo ${{ github.base_ref }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+
+      # Le test de node fait une erreur ce qui fait sortir du workflow et m'empêche de créer un artefact
+      # donc je passe outre l'erreur, l'enregistre et la trigger quand j'ai fini de faire l'artefact
+      - name: Test de node v${{ matrix.version }} et création de l'artefact
+        run: npm test > test_output.txt || echo "error=true" >> $GITHUB_OUTPUT
+        id: npm-test
+
+      - name: Création de l'artefact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_output
+          path: test_output.txt
+
+      - name: Téléchargement artefact
+        uses: actions/download-artifact@v3
+        with:
+          name: test_output
+
+      - name: Lecture de l'artefact
+        run: cat test_output.txt
+
+      - name: Arrêt si erreur lors du test
+        if: steps.npm-test.outputs.error == 'true'
+        run: exit 1
