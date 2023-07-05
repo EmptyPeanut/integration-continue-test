@@ -3,7 +3,7 @@ on:
   push:
     branches: [features/*, hotfix/*]
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, features/*]
 
 jobs:
 
@@ -13,13 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupération du nom de la branche
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
 
       - name: Vérification commit conventionnel sur les branches hotfix et features
-        if: (startsWith(steps.extract_branch.outputs.branch, 'hotfix') || startsWith(steps.extract_branch.outputs.branch, 'features')) && ! (startsWith(github.event.head_commit.message, 'fix:' ) || ! startsWith(github.event.head_commit.message, 'feat:'))
-        run: echo "Le message du commit n'est pas conventionnel" && echo ${{steps.extract_branch.outputs.branch}} && exit 1
+        if: (startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/features')) && ! (startsWith(github.event.head_commit.message, 'fix:' ) || ! startsWith(github.event.head_commit.message, 'feat:'))
+        run: echo "Le message du commit n'est pas conventionnel" && exit 1
 
+  tests_on_node_versions:
+    if: github.event_name == 'pull_request' && startsWith(github.ref, 'refs/heads/features') && startsWith(github.base_ref, 'refs/heads/develop')
+    name: tests_on_node_versions
+    runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        version: [14, 16]
+
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+
+      - name: Test des versions de node
