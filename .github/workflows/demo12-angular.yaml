@@ -22,3 +22,4 @@ jobs:
         if: (startsWith(steps.extract_branch.outputs.branch, 'hotfix') || startsWith(steps.extract_branch.outputs.branch, 'features')) && ! (startsWith(github.event.head_commit.message, 'fix:' ) || ! startsWith(github.event.head_commit.message, 'feat:'))
         run: echo "Le message du commit n'est pas conventionnel" && echo ${{steps.extract_branch.outputs.branch}} && exit 1
 
+
