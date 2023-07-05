@@ -12,6 +12,7 @@ jobs:
       - name: Création de la branche liée au ticket
         uses: robvanderleek/create-issue-branch@main
         with:
+          token: GITHUB_TOKEN
           defaultBranch: 'develop'
           branchName: '${issue.number}-${issue.title}'
 
