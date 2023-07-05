@@ -64,5 +64,5 @@ jobs:
         run: cat test_output.txt
 
       - name: Arrêt si erreur lors du test
-        if: steps.npm-test.outputs.error == true
+        if: steps.npm-test.outputs.error == 'true'
         run: exit 1
