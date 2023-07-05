@@ -23,7 +23,7 @@ jobs:
 
   # Fait des test sur différentes versions de node
   tests_on_node_versions:
-    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'features') && startsWith(github.event.pull_request.base_ref, 'develop')
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'features') && startsWith(github.base_ref, 'develop')
     name: tests_on_node_versions
     runs-on: ubuntu-latest
 
