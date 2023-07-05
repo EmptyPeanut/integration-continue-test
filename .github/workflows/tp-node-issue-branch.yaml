@@ -1,7 +1,7 @@
 name: create_branch_on_issue_assigned
 on:
   issues:
-    types: [ assigned ]
+    types: [assigned]
 
 jobs:
 
@@ -14,3 +14,6 @@ jobs:
         uses: robvanderleek/create-issue-branch@main
         with:
           defaultBranch: 'develop'
+          branchName: '${issue.number}-${issue.title}'
+
+      - run: echo "Fait!"
